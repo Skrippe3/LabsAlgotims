@@ -32,12 +32,45 @@ namespace LabsAlgotims
             return array;
         }
 
+
+        // Быстрая сортировка
+        static void QuickSort(int[] array, int left, int right)
+        {
+            if (left < right)
+            {
+                int pivotIndex = Partition(array, left, right);
+                QuickSort(array, left, pivotIndex - 1);
+                QuickSort(array, pivotIndex + 1, right);
+            }
+        }
+
+        static int Partition(int[] array, int left, int right)
+        {
+            int pivot = array[right];
+            int i = left - 1;
+            for (int j = left; j < right; j++)
+            {
+                if (array[j] < pivot)
+                {
+                    i++;
+                    Swap(ref array[i], ref array[j]);
+                }
+            }
+            Swap(ref array[i + 1], ref array[right]);
+            return i + 1;
+        }
+
+
         static void Main(string[] args)
         {
             int[] arr = new int[] { 7, 21, 3, 6, 5, 2, 9, 12, 4, 8 };
 
-            int[] NewArr = BubbleSort(arr);
+            int[] sortedArr = BubbleSort((int[])arr.Clone());
             Console.WriteLine(string.Join(", ", NewArr));
+
+            int[] sortedArr = (int[])arr.Clone();
+            QuickSort(sortedArr, 0, sortedArr.Length - 1);
+            Console.WriteLine("Отсортированный массив: " + string.Join(", ", sortedArr));
         }
     }
 }
