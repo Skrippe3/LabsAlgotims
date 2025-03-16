@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace LabsAlgotims
 {
@@ -19,7 +15,7 @@ namespace LabsAlgotims
         {
             int len = array.Length;
 
-            for (int i = 1; i < len; i++) 
+            for (int i = 1; i < len; i++)
             {
                 for (int j = 0; j < len - i; j++)
                 {
@@ -65,12 +61,18 @@ namespace LabsAlgotims
         {
             int[] arr = new int[] { 7, 21, 3, 6, 5, 2, 9, 12, 4, 8 };
 
-            int[] sortedArr = BubbleSort((int[])arr.Clone());
-            Console.WriteLine(string.Join(", ", NewArr));
+            int[] bubbleSortedArr = BubbleSort((int[])arr.Clone());
+            Console.WriteLine("Сортировка пузырьком: " + string.Join(", ", bubbleSortedArr));
 
-            int[] sortedArr = (int[])arr.Clone();
-            QuickSort(sortedArr, 0, sortedArr.Length - 1);
-            Console.WriteLine("Отсортированный массив: " + string.Join(", ", sortedArr));
+            int[] quickSortedArr = (int[])arr.Clone();
+            QuickSort(quickSortedArr, 0, quickSortedArr.Length - 1);
+            Console.WriteLine("Быстрая сортировка: " + string.Join(", ", quickSortedArr));
+
+
+            //Выполнение алгоритма машины Тьюринга
+            int x = 10;
+            int y = 5;
+            Console.WriteLine(Class1.LABS2(x, y)); 
         }
     }
 }
