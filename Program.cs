@@ -76,6 +76,65 @@ namespace LabsAlgotims
             return i + 1;
         }
 
+        // Слияние двух отсортированных подмассивов
+        static int[] Merge(int[] left, int[] right)
+        {
+            int leftIndex = 0, rightIndex = 0;
+            int[] result = new int[left.Length + right.Length];
+
+            // Слияние двух массивов
+            while (leftIndex < left.Length && rightIndex < right.Length)
+            {
+                if (left[leftIndex] < right[rightIndex])
+                {
+                    result[leftIndex + rightIndex] = left[leftIndex];
+                    leftIndex++;
+                }
+                else
+                {
+                    result[leftIndex + rightIndex] = right[rightIndex];
+                    rightIndex++;
+                }
+            }
+
+            // Добавление оставшихся элементов
+            while (leftIndex < left.Length)
+            {
+                result[leftIndex + rightIndex] = left[leftIndex];
+                leftIndex++;
+            }
+
+            while (rightIndex < right.Length)
+            {
+                result[leftIndex + rightIndex] = right[rightIndex];
+                rightIndex++;
+            }
+
+            return result;
+        }
+
+        // Сортировка слиянием
+        public static int[] MergeSort(int[] array)
+        {
+            int len = array.Length;
+            if (len <= 1)
+            {
+                return array;
+            }
+
+            int mid = len / 2;
+            int[] left = new int[mid];
+            int[] right = new int[len - mid];
+
+            Array.Copy(array, 0, left, 0, mid);
+            Array.Copy(array, mid, right, 0, len - mid);
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+
+            return Merge(left, right);
+        }
+
 
         static void Main(string[] args)
         {
@@ -90,6 +149,9 @@ namespace LabsAlgotims
             int[] quickSortedArr = (int[])arr.Clone();
             QuickSort(quickSortedArr, 0, quickSortedArr.Length - 1);
             Console.WriteLine("Быстрая сортировка: " + string.Join(", ", quickSortedArr));
+
+            int[] mergeSortedArr = MergeSort((int[])arr.Clone());
+            Console.WriteLine("Сортировка слиянием: " + string.Join(", ", mergeSortedArr));
 
 
             //Выполнение алгоритма машины Тьюринга
