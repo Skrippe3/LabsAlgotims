@@ -28,6 +28,26 @@ namespace LabsAlgotims
             return array;
         }
 
+        // Сортировка вставками 
+        public static int[] InsertionSort(int[] array)
+        {
+            int len = array.Length;
+
+            for (int i = 1; i < len; i++)
+            {
+                int key = array[i];
+                int j = i - 1;
+
+                while (j >= 0 && array[j] > key)
+                {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+                array[j + 1] = key;
+            }
+
+            return array;
+        }
 
         // Быстрая сортировка
         static void QuickSort(int[] array, int left, int right)
@@ -63,6 +83,9 @@ namespace LabsAlgotims
 
             int[] bubbleSortedArr = BubbleSort((int[])arr.Clone());
             Console.WriteLine("Сортировка пузырьком: " + string.Join(", ", bubbleSortedArr));
+
+            int[] insertionSortedArr = InsertionSort((int[])arr.Clone());
+            Console.WriteLine("Сортировка вставками: " + string.Join(", ", insertionSortedArr));
 
             int[] quickSortedArr = (int[])arr.Clone();
             QuickSort(quickSortedArr, 0, quickSortedArr.Length - 1);
